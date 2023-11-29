@@ -9,7 +9,17 @@ document.addEventListener('click', (e) => {
 function addToCart() {
  // create new section with a display prop. if clicked display, else display hidden? ,maybe
  //needs to render after an item is added to the cart
+
+ // add item to order-checkout-container div using js
+ // css is done for this section you just need to add correct classNames
 }
+
+function removeItem() {
+    //remove item from the order list
+}
+
+// on button click for complete order pull up a modal for credit card info, create a form for the modal
+
 
 function renderMenu (menuItems) {
     const menuElements = menuItems.map(item => {
