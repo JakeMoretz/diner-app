@@ -9,9 +9,7 @@ document.addEventListener('click', (e) => {
         addToCart(foodId);
     }
     if(e.target.dataset.remove) {
-        console.log('clicked')
-        console.log(e.target)
-        removeFoodItem()
+        removeFoodItem(e)
         
     }
 });
@@ -26,6 +24,7 @@ function addToCart(foodId) {
     if (selectedFood) {
         const topCheckoutSection = document.createElement('div');
         topCheckoutSection.className = 'top-checkout-section';
+        topCheckoutSection.setAttribute('data-foodDiv', selectedFood.id)
 
         const foodItem = document.createElement('p');
         foodItem.className = 'item';
@@ -33,7 +32,7 @@ function addToCart(foodId) {
 
         const removeBtn = document.createElement('span');
         removeBtn.className = 'item-remove';
-        removeBtn.setAttribute('data-remove', selectedFood)
+        removeBtn.setAttribute('data-remove', selectedFood.id)
         removeBtn.textContent = 'remove';
 
         const itemPrice = document.createElement('p');
@@ -66,13 +65,29 @@ function renderTotalPrice(foodId) {
     }
 }
 
-function removeFoodItem() {
-    const orderCheckoutContainer = document.querySelector('.order-checkout-container')
-    const topCheckoutSection = document.querySelector('top-checkout-section')
+function removeFoodItem(e) {
+    const foodIdToRemove = parseInt(e.target.dataset.remove);
 
-    topCheckoutSection.innerHTML = ""
+    // Find the corresponding checkout section based on the data-foodDiv attribute
+    const checkoutSectionToRemove = document.querySelector(
+        `.top-checkout-section[data-foodDiv="${foodIdToRemove}"]`
+    );
 
+    if (checkoutSectionToRemove) {
+
+        // subtract the removed item from the total price
+        const selectedFood = menuArray.find((food) => food.id === foodIdToRemove);
+        totalOrderPrice -= selectedFood.price;
+
+        // Update the total price display
+        const totalPrice = document.querySelector('.bottom-checkout-section .price');
+        totalPrice.textContent = `$${totalOrderPrice}`;
+
+        // Remove the checkout section
+        checkoutSectionToRemove.remove();
+    }
 }
+
 
 function renderMenu(menuItems) {
     const menuElements = menuItems.map((item) => {
