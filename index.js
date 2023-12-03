@@ -1,19 +1,23 @@
 import { menuArray } from './data.js';
 
 const foodSection = document.getElementById('food-section');
+const orderCheckoutSection = document.querySelector('.order-checkout-section');
 
+orderCheckoutSection.classList.add('hidden');
+
+let totalOrderPrice = 0;
 
 document.addEventListener('click', (e) => {
     if (e.target.dataset.id) {
         const foodId = parseInt(e.target.dataset.id);
         addToCart(foodId);
+        orderCheckoutSection.classList.remove('hidden');
     }
-    if(e.target.dataset.remove) {
-        removeFoodItem(e)
-        
+
+    if (e.target.dataset.remove) {
+        removeFoodItem(e);
     }
 });
-
 
 function addToCart(foodId) {
     const selectedFood = menuArray.find((food) => food.id === foodId);
@@ -24,7 +28,7 @@ function addToCart(foodId) {
     if (selectedFood) {
         const topCheckoutSection = document.createElement('div');
         topCheckoutSection.className = 'top-checkout-section';
-        topCheckoutSection.setAttribute('data-foodDiv', selectedFood.id)
+        topCheckoutSection.setAttribute('data-foodDiv', selectedFood.id);
 
         const foodItem = document.createElement('p');
         foodItem.className = 'item';
@@ -32,7 +36,7 @@ function addToCart(foodId) {
 
         const removeBtn = document.createElement('span');
         removeBtn.className = 'item-remove';
-        removeBtn.setAttribute('data-remove', selectedFood.id)
+        removeBtn.setAttribute('data-remove', selectedFood.id);
         removeBtn.textContent = 'remove';
 
         const itemPrice = document.createElement('p');
@@ -46,11 +50,8 @@ function addToCart(foodId) {
         orderCheckoutContainer.appendChild(topCheckoutSection);
 
         renderTotalPrice(foodId);
-
     }
 }
-
-let totalOrderPrice = 0;
 
 function renderTotalPrice(foodId) {
     const selectedFood = menuArray.find((food) => food.id === foodId);
@@ -74,20 +75,26 @@ function removeFoodItem(e) {
     );
 
     if (checkoutSectionToRemove) {
-
         // subtract the removed item from the total price
-        const selectedFood = menuArray.find((food) => food.id === foodIdToRemove);
+        const selectedFood = menuArray.find(
+            (food) => food.id === foodIdToRemove
+        );
         totalOrderPrice -= selectedFood.price;
 
         // Update the total price display
-        const totalPrice = document.querySelector('.bottom-checkout-section .price');
+        const totalPrice = document.querySelector(
+            '.bottom-checkout-section .price'
+        );
         totalPrice.textContent = `$${totalOrderPrice}`;
 
         // Remove the checkout section
         checkoutSectionToRemove.remove();
+
+        if (totalOrderPrice === 0) {
+            orderCheckoutSection.classList.add('hidden');
+        }
     }
 }
-
 
 function renderMenu(menuItems) {
     const menuElements = menuItems.map((item) => {
