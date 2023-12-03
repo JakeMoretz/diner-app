@@ -2,6 +2,8 @@ import { menuArray } from './data.js';
 
 const foodSection = document.getElementById('food-section');
 const orderCheckoutSection = document.querySelector('.order-checkout-section');
+const completeOrderBtn = document.querySelector('.order-btn')
+const modalCloseBtn = document.querySelector('.modal-close')
 
 orderCheckoutSection.classList.add('hidden');
 
@@ -18,6 +20,19 @@ document.addEventListener('click', (e) => {
         removeFoodItem(e);
     }
 });
+
+
+// completeOrderBtn.addEventListener("click", () => {
+//     const formContainer = document.querySelector('.form-container')
+//     const addBtn = document.getElementsByClassName('addBtn')
+//     addBtn.disabled = true
+//     formContainer.classList.add('form-block')
+// })
+
+// modalCloseBtn.addEventListener("click", () => {
+//     const formContainer = document.querySelector('.form-container')
+//     formContainer.classList.remove('form-block')
+// })
 
 function addToCart(foodId) {
     const selectedFood = menuArray.find((food) => food.id === foodId);
@@ -137,5 +152,6 @@ function renderMenu(menuItems) {
     });
     return menuElements;
 }
+
 
 renderMenu(menuArray);

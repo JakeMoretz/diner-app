@@ -57,6 +57,7 @@ body {
     color: rgb(0, 0, 0, 0.5);
     border: 1px solid rgb(0, 0, 0, 0.3);
     cursor: pointer;
+    font-family: roboto, sans-serif;
 }
 
 .img-food-item {
@@ -166,7 +167,6 @@ hr {
 
 .form-container {
     width: 80vw;
-    height: 400px;
     background-color: white;
     position: absolute;
     top: 50%;
@@ -174,14 +174,18 @@ hr {
     transform: translate(-50%, -50%);
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-   
-    
+    display: none;  
+}
+
+.form-block {
+    display: block;
 }
 
 .card-info-title {
     text-align: center;
     margin-top: 50px;
-   
+   font-size: 1.3em;
+   letter-spacing: 1px;
 }
 
 form {
@@ -189,15 +193,20 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
     padding: 20px;
 }
 
 input {
     height: 50px;
-    width: 100%;
+    width: 95%;
     padding: 0;
     border-radius: 3px;
+    font-size: 1em;
+}
+
+.input{
+    padding-left: 20px;
 }
 
 .pay-btn {
@@ -207,4 +216,18 @@ input {
     margin-top: 20px;
     background-color: #16db99;
     border: none;
+    font-size: 1.1em;
+    color: white;
+    font-family: roboto, sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.modal-close {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    font-size: 1.2em;
+    color: rgb(0, 0, 0, 0.5);
+    cursor: pointer;
 }
