@@ -12,7 +12,10 @@ body {
 }
 
 .img-container {
-    background-color: black;
+    background-image: url(./images/diner.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
     margin: 0;
 }
 
@@ -25,7 +28,7 @@ body {
     color: rgb(224, 224, 224);
     margin: 0;
     font-family: smythe, sans-serif;
-    font-size: 2em;
+    font-size: 2.5em;
 }
 
 .header-p {
@@ -33,7 +36,7 @@ body {
     padding-top: 8px;
     padding-bottom: 70px;
     color: rgb(224, 224, 224);
-    font-size: 1em;
+    font-size: 1.2em;
 }
 
 .food-item-container {
@@ -230,6 +233,11 @@ input {
     cursor: pointer;
 }
 
+.error-msg {
+    text-align: center;
+    color: red;
+}
+
 .modal-close {
     position: absolute;
     top: -10px;
@@ -246,12 +254,16 @@ input {
     align-items: center;
     margin: 15px;
     border-radius: 3px;
-    background-color: #ECFDF5;
+    background-color: #ecfdf5;
     /* display: none; */
+}
+
+.order-confirm-hidden {
+    display: none;
 }
 
 .order-confirm > p {
     font-family: smythe, sans-serif;
     font-size: 2em;
-    color: #065F46;
+    color: #065f46;
 }

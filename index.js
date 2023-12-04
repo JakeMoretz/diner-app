@@ -6,9 +6,14 @@ const completeOrderBtn = document.querySelector('.order-btn');
 const modalCloseBtn = document.querySelector('.modal-close');
 const payBtn = document.querySelector('.pay-btn');
 
+let userInput = document.getElementById('user-name');
+let userCardNumber = document.getElementById('card-number');
+let userCvv = document.getElementById('cvv');
+
 orderCheckoutSection.classList.add('hidden');
 
 let totalOrderPrice = 0;
+let timeoutId;
 
 document.addEventListener('click', (e) => {
     if (e.target.dataset.id) {
@@ -39,16 +44,80 @@ modalCloseBtn.addEventListener('click', () => {
 });
 
 payBtn.addEventListener('click', () => {
-    console.log('clicked');
-    //logic to handle credit card info
-    //validation
+    formValidation();
+
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(removeOrderConfirm, 3000);
+});
+
+function formValidation() {
+    const userInput = document.getElementById('user-name');
+    const userCardNumber = document.getElementById('card-number');
+    const userCvv = document.getElementById('cvv');
+    const errorMsg = document.querySelector('.error-msg');
+
+    if (userInput.value === '') {
+        userInput.style.border = '1px solid red';
+        errorMsg.textContent = 'Enter name on card';
+        return;
+    } else {
+        userInput.style.border = ' 1px solid rgb(0, 0, 0, 0.3)';
+        errorMsg.textContent = '';
+    }
+
+    if (userCardNumber.value.length === 16) {
+        userCardNumber.style.border = ' 1px solid rgb(0, 0, 0, 0.3)';
+        errorMsg.textContent = '';
+    } else {
+        userCardNumber.style.border = '1px solid red';
+        errorMsg.textContent = 'Enter card number';
+        return;
+    }
+
+    if (userCvv.value.length === 3) {
+        userCvv.style.border = ' 1px solid rgb(0, 0, 0, 0.3)';
+        errorMsg.textContent = '';
+    } else {
+        userCvv.style.border = '1px solid red';
+        errorMsg.textContent = 'Enter card cvv number';
+        return;
+    }
 
     const formContainer = document.querySelector('.form-container');
-    formContainer.classList.remove('form-block');
 
+    formContainer.classList.remove('form-block');
     orderCheckoutSection.classList.add('hidden');
+
     orderConfirm();
-});
+    enableButtons();
+    resetOrderSection();
+}
+
+function resetOrderSection() {
+    const topCheckoutSection = document.querySelectorAll(
+        '.top-checkout-section'
+    );
+    const totalPrice = document.querySelector(
+        '.bottom-checkout-section .price'
+    );
+
+    topCheckoutSection.forEach((section) => {
+        section.remove();
+    });
+
+    totalOrderPrice = 0;
+    userInput.value = '';
+    userCardNumber.value = '';
+    userCvv.value = '';
+}
+
+function enableButtons() {
+    const addBtn = document.querySelectorAll('.addBtn');
+    addBtn.forEach((add) => {
+        add.disabled = false;
+    });
+}
 
 function orderConfirm() {
     const appContainer = document.querySelector('.app-container');
@@ -62,6 +131,13 @@ function orderConfirm() {
     orderConfirm.appendChild(orderText);
 
     appContainer.appendChild(orderConfirm);
+}
+
+function removeOrderConfirm() {
+    const orderConfirm = document.querySelector('.order-confirm');
+    if (orderConfirm) {
+        orderConfirm.remove();
+    }
 }
 
 function addToCart(foodId) {
