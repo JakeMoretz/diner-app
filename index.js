@@ -2,8 +2,9 @@ import { menuArray } from './data.js';
 
 const foodSection = document.getElementById('food-section');
 const orderCheckoutSection = document.querySelector('.order-checkout-section');
-const completeOrderBtn = document.querySelector('.order-btn')
-const modalCloseBtn = document.querySelector('.modal-close')
+const completeOrderBtn = document.querySelector('.order-btn');
+const modalCloseBtn = document.querySelector('.modal-close');
+const payBtn = document.querySelector('.pay-btn');
 
 orderCheckoutSection.classList.add('hidden');
 
@@ -21,18 +22,47 @@ document.addEventListener('click', (e) => {
     }
 });
 
+completeOrderBtn.addEventListener('click', () => {
+    const formContainer = document.querySelector('.form-container');
+    const addBtn = document.querySelectorAll('.addBtn');
 
-// completeOrderBtn.addEventListener("click", () => {
-//     const formContainer = document.querySelector('.form-container')
-//     const addBtn = document.getElementsByClassName('addBtn')
-//     addBtn.disabled = true
-//     formContainer.classList.add('form-block')
-// })
+    addBtn.forEach((add) => {
+        add.disabled = true;
+    });
 
-// modalCloseBtn.addEventListener("click", () => {
-//     const formContainer = document.querySelector('.form-container')
-//     formContainer.classList.remove('form-block')
-// })
+    formContainer.classList.add('form-block');
+});
+
+modalCloseBtn.addEventListener('click', () => {
+    const formContainer = document.querySelector('.form-container');
+    formContainer.classList.remove('form-block');
+});
+
+payBtn.addEventListener('click', () => {
+    console.log('clicked');
+    //logic to handle credit card info
+    //validation
+
+    const formContainer = document.querySelector('.form-container');
+    formContainer.classList.remove('form-block');
+
+    orderCheckoutSection.classList.add('hidden');
+    orderConfirm();
+});
+
+function orderConfirm() {
+    const appContainer = document.querySelector('.app-container');
+    const orderConfirm = document.createElement('div');
+    const orderText = document.createElement('p');
+    const userInput = document.getElementById('user-name');
+
+    orderConfirm.className = 'order-confirm';
+    orderText.textContent = `Thanks ${userInput.value}, Your order is on the way`;
+
+    orderConfirm.appendChild(orderText);
+
+    appContainer.appendChild(orderConfirm);
+}
 
 function addToCart(foodId) {
     const selectedFood = menuArray.find((food) => food.id === foodId);
@@ -152,6 +182,5 @@ function renderMenu(menuItems) {
     });
     return menuElements;
 }
-
 
 renderMenu(menuArray);
