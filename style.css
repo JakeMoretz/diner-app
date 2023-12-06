@@ -50,11 +50,12 @@ body {
 
 .addBtn {
     position: absolute;
-    top: 85px;
+    text-align: center;
+    top: 120px;
     right: 35px;
     height: 40px;
     width: 40px;
-    border-radius: 30px;
+    border-radius: 50px;
     font-size: 1.5em;
     background-color: transparent;
     color: rgb(0, 0, 0, 0.5);
