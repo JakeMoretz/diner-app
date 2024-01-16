@@ -30,9 +30,14 @@ document.addEventListener('click', (e) => {
 completeOrderBtn.addEventListener('click', () => {
     const formContainer = document.querySelector('.form-container');
     const addBtn = document.querySelectorAll('.addBtn');
+    const itemRemove = document.querySelectorAll('.item-remove');
 
     addBtn.forEach((add) => {
-        add.disabled = true;
+        add.classList.add('addBtnDisabled');
+    });
+
+    itemRemove.forEach((item) => {
+        item.classList.add('item-remove-disabled');
     });
 
     formContainer.classList.add('form-block');
@@ -40,11 +45,32 @@ completeOrderBtn.addEventListener('click', () => {
 
 modalCloseBtn.addEventListener('click', () => {
     const formContainer = document.querySelector('.form-container');
+    const addBtn = document.querySelectorAll('.addBtn');
+    const itemRemove = document.querySelectorAll('.item-remove');
+
+    addBtn.forEach((add) => {
+        add.classList.remove('addBtnDisabled');
+    });
+
+    itemRemove.forEach((item) => {
+        item.classList.remove('item-remove-disabled');
+    });
+
     formContainer.classList.remove('form-block');
 });
 
 payBtn.addEventListener('click', () => {
     formValidation();
+    const addBtn = document.querySelectorAll('.addBtn');
+    const itemRemove = document.querySelectorAll('.item-remove');
+
+    addBtn.forEach((add) => {
+        add.classList.remove('addBtnDisabled');
+    });
+
+    itemRemove.forEach((item) => {
+        item.classList.remove('item-remove-disabled');
+    });
 
     clearTimeout(timeoutId);
 
@@ -247,14 +273,16 @@ function renderMenu(menuItems) {
         foodPrice.textContent = `$${item.price}`;
         foodInfoContainer.appendChild(foodPrice);
 
-        const addBtn = document.createElement('button'); // add btn
+        const addBtn = document.createElement('img'); // add btn
         addBtn.className = 'addBtn';
-        addBtn.textContent = '+';
+        // addBtn.textContent = '+';
+        addBtn.src = './images/add.png';
+
         addBtn.setAttribute('data-id', item.id); // dataset to grab the id of the event clicked
         menuItemContainer.appendChild(addBtn);
 
         const hr = document.createElement('hr');
-        foodSection.appendChild(hr);
+        foodSection.appendChild(menuItemContainer);
     });
     return menuElements;
 }

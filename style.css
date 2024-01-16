@@ -53,17 +53,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 120px;
+    top: 80px;
     right: 35px;
     height: 40px;
-    width: 30px;
-    border-radius: 50px;
-    font-size: 1.5em;
-    background-color: transparent;
     color: rgb(0, 0, 0, 0.5);
-    border: 1px solid rgb(0, 0, 0, 0.3);
     cursor: pointer;
-    font-family: roboto, sans-serif;
+}
+
+.addBtnDisabled {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 80px;
+    right: 35px;
+    height: 40px;
+    color: rgb(0, 0, 0, 0.5);
+    cursor: pointer;
+    pointer-events: none;
 }
 
 .img-food-item {
@@ -79,6 +86,7 @@ body {
 
 .description {
     margin: 0;
+    margin-right: 10px;
     padding-top: 4px;
     padding-bottom: 10px;
     font-size: 15px;
@@ -136,6 +144,14 @@ hr {
     padding-left: 10px;
     color: rgb(0, 0, 0, 0.4);
     cursor: pointer;
+}
+
+.item-remove-disabled {
+    font-size: 15px;
+    padding-left: 10px;
+    color: rgb(0, 0, 0, 0.4);
+    cursor: pointer;
+    pointer-events: none;
 }
 
 .item-price {
