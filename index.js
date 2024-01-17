@@ -275,7 +275,6 @@ function renderMenu(menuItems) {
 
         const addBtn = document.createElement('img'); // add btn
         addBtn.className = 'addBtn';
-        // addBtn.textContent = '+';
         addBtn.src = './images/add.png';
 
         addBtn.setAttribute('data-id', item.id); // dataset to grab the id of the event clicked
@@ -283,6 +282,7 @@ function renderMenu(menuItems) {
 
         const hr = document.createElement('hr');
         foodSection.appendChild(menuItemContainer);
+        foodSection.appendChild(hr);
     });
     return menuElements;
 }

@@ -12,23 +12,27 @@ body {
 }
 
 .img-container {
-    background-image: url(./images/diner.png);
+    background-image: url(./images/burger.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
     margin: 0;
+    background-color: black;
 }
 
 .info-container {
     padding-top: 46px;
     padding-left: 46px;
+    height: 700px;
+    max-width: 700px;
+    min-width: none;
 }
 
 .diner-name {
     color: rgb(224, 224, 224);
     margin: 0;
     font-family: smythe, sans-serif;
-    font-size: 2.5em;
+    font-size: 4em;
 }
 
 .header-p {
@@ -285,4 +289,52 @@ input {
     font-family: smythe, sans-serif;
     font-size: 2em;
     color: #065f46;
+}
+
+@media (max-width: 1100px) {
+    .info-container {
+        padding-top: 46px;
+        padding-left: 46px;
+        height: 500px;
+        max-width: 700px;
+        min-width: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .addBtn {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 80px;
+        right: 35px;
+        height: 30px;
+        color: rgb(0, 0, 0, 0.5);
+        cursor: pointer;
+    }
+
+    .description {
+        width: 150px;
+    }
+
+    .info-container {
+        padding-top: 46px;
+        padding-left: 46px;
+        height: 400px;
+        max-width: 700px;
+    }
+
+    .diner-name {
+        color: rgb(224, 224, 224);
+        margin: 0;
+        font-family: smythe, sans-serif;
+        font-size: 2.8em;
+    }
+}
+
+@media (max-width: 400px) {
+    .description {
+        width: 100px;
+    }
 }
